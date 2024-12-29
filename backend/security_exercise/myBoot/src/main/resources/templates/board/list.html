@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Board List</title>
+</head>
+<body>
+
+<th:block th:replace="~{layouts/basic :: setContent(~{this :: content})}">
+  <th:block th:fragment="content">
+    <h2>글쓰기</h2>
+    <form th:action="@{/board/write}" method="post">
+      <label for="title">제목</label>
+      <input name="title" type="text" maxlength="10" id="title">
+
+      <label for="content">내용</label>
+      <input name="content" type="text" maxlength="400" id="content">
+
+      <label for="writer">작성자</label>
+      <input name="writer" type="text" id="writer">
+
+      <button type="submit">등록하기</button>
+    </form>
+
+    <br>
+
+    <h2>글 목록</h2>
+    <table>
+      <tr>
+        <th>게시글 번호</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>작성자</th>
+        <th>등록일</th>
+      </tr>
+
+      <!-- 글 목록 반복 출력 -->
+      <tr th:each="item : ${result.dtoList}">
+        <td th:text="${item.bno}"></td>
+        <td>
+          <a th:href="@{/board/read(bno=${item.bno})}" th:text="${item.title} + ... + ${item.replyCount}"></a>
+        </td>
+        <td th:text="${item.content}"></td>
+        <td th:text="${item.writerEmail}"></td>
+        <td th:text="${item.regDate}"></td>
+      </tr>
+    </table>
+
+    <nav aria-label="...">
+      <ul th:class="pagination">
+        <li class="page-item" th:if="${result.prev}">
+          <a th:class="page-link" th:href="@{/board/list(page=${(result.start)-1})}" tabindex="-1"
+             aria-disabled="true">Previous</a>
+        </li>
+        <th:block th:each="page : ${result.pageList}">
+          <li th:class=" 'page-item '+${result.page == page?'active':''}" aria-current="page">
+            <a th:class="page-link" th:href="@{/board/list(page=${page})}">[[${page}]]</a>
+          </li>
+        </th:block>
+        <li th:class="page-item" th:if="${result.next}">
+          <a th:class="page-link" th:href="@{/board/list(page=${(result.end)+1})}">Next</a>
+        </li>
+      </ul>
+  </th:block>
+</th:block>
+
+
+
+
+</nav>
+</body>
+</html>

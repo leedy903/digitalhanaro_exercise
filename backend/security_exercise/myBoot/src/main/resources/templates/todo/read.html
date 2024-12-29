@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todo Read</title>
+</head>
+<body>
+<th:block th:replace="~{layouts/basic :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <h1 class="my-4">할일 상세</h1>
+        <dl class="row">
+            <dt class="col-sm-3">제목</dt>
+            <dd class="col-sm-9" th:text="${todo.title}"></dd>
+            <dt class="col-sm-3">작성자</dt>
+            <dd class="col-sm-9" th:text="${todo.writer}"></dd>
+            <dt class="col-sm-3">기한</dt>
+            <dd class="col-sm-9" th:text="${todo.dueDate}"></dd>
+            <dt class="col-sm-3">완료 여부</dt>
+            <dd class="col-sm-9">
+                <input type="checkbox" th:checked="${todo.complete}" class="pe-none">
+            </dd>
+        </dl>
+
+        <!-- 삭제하기 폼 -->
+        <div class="d-flex flex-box gap-2">
+            <button type="submit" class="btn btn-warning">
+                <a th:href="@{/todo/update(tno=${todo.tno})}" class="text-black text-decoration-none">수정하기</a>
+            </button>
+            <form th:action="@{/todo/delete(tno=${todo.tno})}" method="post">
+                <button type="submit" class="btn btn-danger">삭제하기</button>
+            </form>
+        </div>
+    </th:block>
+</th:block>
+
+
+</body>
+</html>

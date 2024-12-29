@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <filter>
+        <filter-name>My Filter</filter-name>
+        <filter-class>com.example.demo.filters.MyFilter</filter-class>
+        <init-param></init-param>
+    </filter>
+    <context-param>
+        <param-name>MySQLDriver</param-name>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>MySQLUrl</param-name>
+        <param-value>jdbc:mysql://localhost:3306/scottdb?useSSL=false&amp;allowPublicKeyRetrieval=true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>MySQLId</param-name>
+        <param-value>scott</param-value>
+    </context-param>
+    <context-param>
+        <param-name>MySQLPwd</param-name>
+        <param-value>tiger</param-value>
+    </context-param>
+</web-app>

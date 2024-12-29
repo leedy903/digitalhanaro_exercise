@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ex2</title>
+    <style>
+        .target { background-color: red; }
+    </style>
+</head>
+<body>
+    <ul>
+        <th:block th:each="dto:${list}">
+            <li th:text="${dto.sno%5 == 0} ? ${dto.sno}:${dto.first}"></li>
+        </th:block>
+
+    </ul>
+    <div th:with="num1 = ${10}, num2 = ${20}">
+        <h4 th:text="${num1 + num2}"></h4>
+    </div>
+    <ul>
+        <li th:each="str, status: ${list}">
+            <span th:if="${status.odd}">ODD -- [[${str}]]</span>
+            <span th:unless="${status.odd}">EVEN -- [[${str}]]</span>
+        </li>
+    </ul>
+</body>
+</html>

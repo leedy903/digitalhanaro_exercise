@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ExLink</title>
+</head>
+<body>
+    <th:block th:replace="~{/layouts/layout1 :: setContent(~{this :: content})}">
+        <th:block th:fragment="content">
+            <h1>exTemplatePage</h1>
+        </th:block>
+    </th:block>
+
+</body>
+</html>

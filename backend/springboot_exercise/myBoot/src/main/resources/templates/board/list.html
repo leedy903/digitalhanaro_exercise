@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<th:block th:replace="~{layouts/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <table>
+            <thead>
+            <tr>
+                <th>게시글 번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>등록일</th>
+                <th>조회수</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${bList.dtoList}">
+                <td th:text="${item.bno}">
+                </td>
+                <td>
+                    <a th:href="@{/board/read(bno=${item.bno})}" th:text="${item.title}"></a>
+                </td>
+                <td th:text="${item.content}"></td>
+                <td th:text="${item.writer}"></td>
+                <td th:text="${#temporals.format(item.regDate, 'yyyy/MM//dd')}"></td>
+                <td th:text="${item.hit}"></td>
+                <td>
+                    <form th:action="@{/board/remove(bno=${item.bno})}" method="post">
+                        <button type="submit">삭제하기</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="...">
+            <ul th:class="pagination">
+                <li class="page-item" th:if="${bList.prev}">
+                    <a th:class="page-link" th:href="@{/board/list(page=${(bList.start)-1})}" tabindex="-1"
+                       aria-disabled="true">Previous</a>
+                </li>
+                <th:block th:each="page : ${bList.pageList}">
+                    <li th:class=" 'page-item '+${bList.page == page?'active':''}" aria-current="page">
+                        <a th:class="page-link" th:href="@{/board/list(page=${page})}">[[${page}]]</a>
+                    </li>
+                </th:block>
+                <li th:class="page-item" th:if="${bList.next}">
+                    <a th:class="page-link" th:href="@{/board/list(page=${(bList.end)+1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <a th:href="@{/board/write}" th:text="작성하기"></a>
+    </th:block>
+</th:block>
+</body>

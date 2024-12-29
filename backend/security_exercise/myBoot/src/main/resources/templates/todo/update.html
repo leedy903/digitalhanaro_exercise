@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todo Update</title>
+</head>
+<body>
+
+<th:block th:replace="~{layouts/basic :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <h1 class="my-4">할일 수정하기</h1>
+        <form th:action="@{/todo/update(tno=${todo.tno})}" th:object="${todo}" method="post">
+            <input type="hidden" name="tno" th:value="${todo.tno}">
+
+            <div class="mb-3">
+                <label for="title">제목</label>
+                <input name="title" th:value="${todo.title}" type="text" class="form-control" maxlength="200" id="title" placeholder="제목을 입력하세요" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="writer"> 작성자</label>
+                <input name="writer" th:value="${todo.writer}" type="text" class="form-control" maxlength="255" id="writer" placeholder="작성자를 입력하세요" required>
+            </div>
+            <div class="mb-3">
+                <label for="due-date" class="form-label">기한</label>
+                <input name="dueDate" th:value="${todo.dueDate}" type="date" id="due-date" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="complete" class="form-label">완료 여부</label>
+                <input name="complete" th:checked="${todo.complete}" id="complete" type="checkbox" onchange="updateCheckboxValue(this)">
+            </div>
+            <button type="submit" class="btn btn-success">추가하기</button>
+        </form>
+        <script>
+            function updateCheckboxValue(checkbox) {
+                if (checkbox.checked) {
+                    checkbox.value = "true";
+                } else {
+                    checkbox.value = "false";
+                }
+            }
+        </script>
+    </th:block>
+</th:block>
+
+</body>
+</html>

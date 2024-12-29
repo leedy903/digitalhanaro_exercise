@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<th:block th:replace="~{layouts/basic :: setContent(~{this::content})}">
+  <th:block th:fragment="content">
+    <div class="container">
+      <h1>Todo</h1>
+      <p><a th:href="@{/todo/list}">Go back to list</a></p>
+      <form th:action="@{/todo/modify}" method="POST">
+        <input type="hidden" id="tno" name="tno" th:value="${todo.tno}">
+
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" th:value="${todo.title}" required>
+        </div>
+
+        <div>
+          <label for="writer">Writer:</label>
+          <input type="text" id="writer" name="writer" th:value="${todo.writer}" required>
+        </div>
+
+        <div>
+          <label for="complete">Complete:</label>
+          <input type="checkbox" id="complete" name="complete" th:checked="${todo.complete}">
+        </div>
+
+        <div>
+          <label for="dueDate">DueDate:</label>
+          <input type="date" id="dueDate" name="dueDate" th:value="${todo.dueDate}">
+        </div>
+        <button type="submit"  class="btn btn-primary">Edit</button>
+        <a th:href="@{/todo/remove(tno=${todo.tno})}" class="btn btn-danger">Delete</a>
+      </form>
+    </div>
+  </th:block>
+</th:block>
+
+</body>
+</html>

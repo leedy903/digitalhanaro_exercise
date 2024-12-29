@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li th:each="dto, state: ${list}" th:class="${dto.sno % 5==0}? 'target'" th:text="${dto}">
+        [[${state.index}]] --- [[${dto}]]
+    </li>
+</ul>
+<ul>
+    <li th:each="str, status: ${list}">
+        <span th:if="${status.odd}">ODD--[[${str}]]</span>
+        <span th:unless="${status.odd}">EVEN--[[${str}]]</span>
+    </li>
+</ul>
+<div th:with="num1 = ${10}, num2 = ${20}">
+    <h4 th:text="${num1 + num2}"></h4>
+</div>
+<ul>
+    <th:block th:each="dto%{list}">
+        <li th:text="${dto.sno %5 == 0}?${dto.sno}:${dto.first}"></li>
+    </th:block>
+</ul>
+<ul>
+    <li></li>
+</ul>
+</body>
+</html>
+
+<style>
+    .target{background-color: #9ad39a;}
+</style>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board Read</title>
+</head>
+<body>
+<h2>게시글 내용</h2>
+<h3 th:text="'bno : ' + ${board.bno}"></h3>
+<h3 th:text="'title : ' + ${board.title}"></h3>
+<h3 th:text="'content : ' + ${board.content}"></h3>
+<h3 th:text="'writer : ' + ${board.writer}"></h3>
+<h3 th:text="'regDate : ' + ${board.regDate}"></h3>
+<h3 th:text="'hit : ' + ${board.hit}"></h3>
+
+<!-- 삭제하기 폼 -->
+<form th:action="@{/board/remove(bno=${board.bno})}" method="post">
+    <button type="submit">삭제하기</button>
+</form>
+
+<br>
+
+<h2>게시글 수정하기</h2>
+<form th:action="@{/board/modify}" method="post">
+    <input name="bno" type="hidden" id="bno" th:value="${board.bno}">
+
+    <label for="title">제목</label>
+    <input name="title" type="text" maxlength="10" id="title" th:value="${board.title}">
+
+    <label for="content">내용</label>
+    <input name="content" type="text" maxlength="400" id="content" th:value="${board.content}">
+
+    <input name="writer" type="hidden" id="writer" th:value="${board.writer}">
+
+    <button type="submit">수정하기</button>
+</form>
+</body>
+</html>

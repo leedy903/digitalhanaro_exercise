@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todo List</title>
+</head>
+<body>
+
+<th:block th:replace="~{layouts/basic :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <h1 class="my-4">할일 목록</h1>
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <th>할일 번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>기한</th>
+                    <th>완료 여부</th>
+                </tr>
+            </thead>
+
+            <!-- 글 목록 반복 출력 -->
+            <tbody>
+                <tr th:each="item : ${tList}">
+
+                    <td th:text="${item.tno}"></td>
+                    <td><a th:href="@{/todo/read(tno=${item.tno})}" th:text="${item.title}"></a></td>
+                    <td th:text="${item.writer}"></td>
+                    <td th:text="${item.dueDate}"></td>
+                    <td>
+                        <input type="checkbox" name="complete" th:checked="${item.complete}" class="pe-none">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+</th:block>
+
+</body>
+</html>
